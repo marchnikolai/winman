@@ -1,0 +1,35 @@
+---
+# tasks file for roles/win-ad
+
+- name: install Windows AD
+  win_feature:
+    name: AD-Domain-Services
+    state: present
+    include_management_tools: "{{ win_ad__include_management_tools | d('yes') }}"
+    include_sub_features: "{{ win_ad__include_sub_features | d('yes') }}"
+  register: win_feature_result
+  notify: reboot_required
+
+- name: configure AD
+  win_domain:
+    dns_domain_name: "{{ win_ad__domain_name }}"
+    safe_mode_password: "{{ win_ad__safe_mode_password }}"
+  register: win_domain_result
+  notify: reboot_required
+  ignore_errors: true
+
+- name: list DCs
+  win_shell: "nltest /dclist:{{ win_ad__domain_name }}"
+  register: domain_list_result
+  when: win_domain_result | succeeded
+
+- name: show DCs
+  debug:
+    var: domain_list_result | d('Empty')
+
+- name: reboot_required
+  win_reboot:
+    shutdown_timeout: 3600
+    reboot_timeout: 3600
+  when: win_feature_result.restart_needed | d('') or win_domain_result.reboot_required | d('') or win_ad__force_reboot | d('') or  win_domain_result.module_stderr | search('needs to be restarted')
+

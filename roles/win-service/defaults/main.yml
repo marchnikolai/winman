@@ -1,0 +1,5 @@
+---
+# defaults file for roles/win-service
+
+win_service__distributions:
+  - "Microsoft Windows Server 2012 R2 Standard"

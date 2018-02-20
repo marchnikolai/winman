@@ -1,0 +1,37 @@
+---
+# tasks file for roles/win-service
+
+- name: install Windows service
+  win_chocolatey:
+     name: "{{ item.name }}"
+     params: "{{ item.params }}"
+     state: "{{ item.state | d('latest') }}"
+  when: ansible_distribution in win_service__distributions and item.name | d('')
+  with_items: "{{ win_service__services }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: start Windows service
+  win_service:
+     name: "{{ item.service }}"
+     state: "{{ item.status | d('started') }}"
+     start_mode: "{{ item.start_mode | d('auto') }}"
+  when: ansible_distribution in win_service__distributions and item.name | d('')
+  with_items: "{{ win_service__services }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: add win_firewall_rule
+  win_firewall_rule:
+      name: "{{ item.service }}"
+      localport: "{{ item.localport }}"
+      action: allow
+      direction: in
+      protocol: "{{ item.protocol }}"
+      state: "{{ item.firewall_rule | d('present') }}"
+      enabled: yes
+  when: item.name | d('') and item.localport | d('')
+  with_items: "{{ win_service__services }}"
+  loop_control:
+    label: "{{ item.service }}"
+

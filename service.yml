@@ -1,0 +1,19 @@
+---
+
+- name: install services
+  hosts: windows
+  gather_facts: yes
+
+  roles:
+    - role: win-service
+      win_service__services:
+        - name: openssh
+          params: /SSHServerFeature
+          state: latest
+          status: started
+          start_mode: auto
+          service: SSHD
+          localport: 22
+          protocol: tcp
+          firewall_rule: present
+

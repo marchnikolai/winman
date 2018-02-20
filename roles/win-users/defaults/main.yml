@@ -1,0 +1,14 @@
+---
+# defaults file for roles/win-users
+
+win_users__users: []
+win_users__domain: 'ad1.example.domain.com'
+
+# Example of users sctructure
+# win_users__users:
+#   - name: vasyag
+#     firstname: Uasya
+#     surname: Gates
+#     password: "redhat@123"
+#     state: present
+
