@@ -1,0 +1,16 @@
+---
+
+- name: install AD, create users, install SSHD service
+  hosts: windows
+  gather_facts: no
+
+  roles:
+    - role: win-ad
+      tags: [ ad ]
+
+    - role: win-users
+      tags: [ users ]
+
+    - role: win-service
+      tags: [ service ]
+

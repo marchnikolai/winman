@@ -8,14 +8,12 @@
     include_management_tools: "{{ win_ad__include_management_tools | d('yes') }}"
     include_sub_features: "{{ win_ad__include_sub_features | d('yes') }}"
   register: win_feature_result
-  notify: reboot_required
 
 - name: configure AD
   win_domain:
     dns_domain_name: "{{ win_ad__domain_name }}"
     safe_mode_password: "{{ win_ad__safe_mode_password }}"
   register: win_domain_result
-  notify: reboot_required
   ignore_errors: true
 
 - name: list DCs

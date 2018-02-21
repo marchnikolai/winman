@@ -1,6 +1,3 @@
-[all:vars]
-GUID=3158
-
 [GenericExample:vars]
 
 ###########################################################################
@@ -21,31 +18,31 @@ support
 
 [towers]
 ## These are the towers
-tower1.3158.internal public_host_name=tower1."{{ GUID }}".example.opentlc.com ssh_host=ec2-35-172-59-62.compute-1.amazonaws.com
-tower2.3158.internal public_host_name=tower2."{{ GUID }}".example.opentlc.com ssh_host=ec2-34-237-168-231.compute-1.amazonaws.com
-tower3.3158.internal public_host_name=tower3."{{ GUID }}".example.opentlc.com ssh_host=ec2-35-172-36-196.compute-1.amazonaws.com
+tower1.d91d.internal public_host_name=tower1.d91d.example.opentlc.com ssh_host=ec2-35-172-28-91.compute-1.amazonaws.com
+tower2.d91d.internal public_host_name=tower2.d91d.example.opentlc.com ssh_host=ec2-54-174-194-51.compute-1.amazonaws.com
+tower3.d91d.internal public_host_name=tower3.d91d.example.opentlc.com ssh_host=ec2-34-206-136-78.compute-1.amazonaws.com
 
 [frontends]
 ## These are the frontends
-frontend1.3158.internal ssh_host=ec2-35-172-102-105.compute-1.amazonaws.com
+frontend1.d91d.internal ssh_host=ec2-35-172-15-16.compute-1.amazonaws.com
 
 [apps]
 ## These are the apps
-app1.3158.internal ssh_host=ec2-34-203-178-226.compute-1.amazonaws.com
-app2.3158.internal ssh_host=ec2-35-171-178-34.compute-1.amazonaws.com
+app1.d91d.internal ssh_host=ec2-34-234-20-5.compute-1.amazonaws.com
+app2.d91d.internal ssh_host=ec2-34-236-210-38.compute-1.amazonaws.com
 
 [appdbs]
 ## These are the appdbs
-appdb1.3158.internal ssh_host=ec2-34-195-71-240.compute-1.amazonaws.com
+appdb1.d91d.internal ssh_host=ec2-35-171-197-251.compute-1.amazonaws.com
 
 [windows]
 ## These are the activedirectory servers
-ad1.3158.example.opentlc.com ssh_host=ad1."{{ GUID }}".example.opentlc.com ansible_password=jVMijRwLbI02gFCo2xkjlZ9lxEA7bm7zgg==
+ad1.d91d.example.opentlc.com ssh_host=ad1.d91d.example.opentlc.com ansible_password=jVMijRwLbI02gFCo2xkjlZ9lxEA7bm7zgg==
 
 ## These are the supporthosts
 [support]
-support1.3158.internal ssh_host=ec2-35-171-200-153.compute-1.amazonaws.com
-support2.3158.internal ssh_host=ec2-52-55-80-145.compute-1.amazonaws.com
+support1.d91d.internal ssh_host=ec2-35-168-235-72.compute-1.amazonaws.com
+support2.d91d.internal ssh_host=ec2-35-171-250-217.compute-1.amazonaws.com
 
 [windows:vars]
 ansible_connection=winrm
